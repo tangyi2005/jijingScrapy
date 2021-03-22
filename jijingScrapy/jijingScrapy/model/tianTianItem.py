@@ -35,3 +35,9 @@ class HonorItem(scrapy.Item):
     recentYears = scrapy.Field()
     #成立来
     setUpTo = scrapy.Field()
+    # 创建时间
+    creationTime = scrapy.Field()
+    # 更新时间
+    updateTime = scrapy.Field()
+    # 创建的日期
+    creationDate = scrapy.Field()

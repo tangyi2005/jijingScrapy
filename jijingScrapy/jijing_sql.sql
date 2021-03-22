@@ -1,0 +1,23 @@
+create table jijian_data(
+    id int(11) not null auto_increment,
+    ji_jing_id varchar(20) default null comment '基金id',
+    ji_fing_href varchar(200) default null comment '基金详情url',
+    ji_jing_title varchar(50) default null comment '基金名称',
+    ji_jing_time varchar(20) default null comment '基金数据时间',
+    net_value_unit double default null comment '单位净值',
+    cumulative_value double default null comment '累计净值',
+    day_growth varchar(20) default null comment '日增长率',
+    nearly_week varchar(20) default null comment '近1周',
+    nearly_month varchar(20) default null comment '近1月',
+    early_three_months varchar(20) default null comment '近3月',
+    nearly_six_month varchar(20) default null comment '近6月',
+    nearly_one_year varchar(20) default null comment '近1年',
+    nearly_two_years varchar(20) default null comment '近2年',
+    early_three_years varchar(20) default null comment '近3年',
+    recent_years varchar(20) default null comment '今年来',
+    set_up_to varchar(20) default null comment '成立来',
+    creation_time timestamp default null comment '创建时间',
+    update_time timestamp default null comment '更新时间',
+    creation_date varchar(20) default null comment '创建日期',
+    primary key (id)
+)CHARSET=utf8 comment '各个基金数据表'
