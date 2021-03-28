@@ -1,4 +1,5 @@
 #encoding:utf-8
+import json
 
 import scrapy
 import logging
@@ -6,16 +7,16 @@ from bs4 import BeautifulSoup
 from ..model.tianTianItem import HonorItem
 from ..extras import utils
 
-
 class cnblogsData(scrapy.Spider):
     name = 'cnblogs'
     start_urls = ['http://fund.eastmoney.com/data/fundranking.html#tall;c0;r;s6yzf;pn50;ddesc;qsd20200320;qed20210320;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb']
     model_urls = []
+    # base_site = "http://fund.eastmoney.com/data/fundranking.html#tall;c0;r;s6yzf;pn50;ddesc;qsd20200320;qed20210320;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb"
 
     def parse(self, response):
         driver = response.driver
         item = HonorItem()
-        logging.info("开始log对应")
+        logging.debug("开始log对应")
         print('url:', response.url)
         print('new url:', response.urljoin('Zarten'))
         # data = json.loads(response.body)
@@ -47,20 +48,36 @@ class cnblogsData(scrapy.Spider):
         #             item["setUpTo"] = link01.find_all('td')[16].string
         #             yield item
 
+        for link in res.find_all('tbody'):
+            if link.find(type="checkbox"):
+                # print("这里有没经01:", link)
+                logging.debug("获取的页面数据 %s",link)
         a = res.find_all(id="pagebar")
         print("这里有多少数据瞒住条件", a)
-        utils.find_element_by_css_selector(driver,"label[value='2']").click()
+        s = utils.find_element_by_css_selector(driver,"label[value='2']").click()
+        cnblogsData.parse_details(driver)
+        # yield scrapy.Request(response.url, callback=self.parse_detail)
+        logging.debug("获取第二页请求的URL %s ", driver)
+        # utils.find_element_by_css_selector(driver, "下一页").click()
+        # yield scrapy.Request("https://www.baidu.com", callback=self.parse)
         # driver.find_element_by_link_text("下一页").click()
+        # 退出，清除浏览器缓存
+        driver.quit()
 
 
 
     def parse_model(self, response):
         res = BeautifulSoup(response.text)
-        print("parse_model这里有没经", res)
+        print("*****parse_model这里有没经", res)
 
-    def parse_detail(self, response):
-        res = BeautifulSoup(response.text)
-        print("parse_detail这里有没经", res)
+    def parse_details(self,driver):
+        print("*****parse_detail这里有没经")
+        res = BeautifulSoup(driver.page_source, 'html.parser', from_encoding='utf-8')
+        for link in res.find_all('tbody'):
+            if link.find(type="checkbox"):
+                # print("这里有没经01:", link)
+                logging.debug("parse_detail获取的页面数据 %s",link)
 
     def closed(self, reason, response):  # 爬虫结束爬取后关闭浏览器对象
+        print("*******closed")
         response.driver.quit()

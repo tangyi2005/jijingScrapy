@@ -62,8 +62,9 @@ DOWNLOADER_MIDDLEWARES = {
     # 'cnblogs.middlewares.RandomUserAgent': 1, #随机user agent
     # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
     # 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 123,
-    # 'cnblogs.middlewares.ProxyMiddleware': 100, #代理需要用到
-    'cnblogs.middlewares.WangyiproDownloaderMiddleware':543,
+    # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware':543,
+    # 'jijingScrapy.middlewares.ProxyMiddleware': 125, #代理需要用到
+    'jijingScrapy.middlewares.WangyiproDownloaderMiddleware':126,
 }
 
 ITEM_PIPELINES = {
@@ -131,15 +132,15 @@ EXTENSIONS = {
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
 
-PROXIES = [
-    {'ip_port': '112.111.77.194:9999', 'user_pass': ''},
-    {'ip_port': '175.42.123.114:9999', 'user_pass': ''},
-    {'ip_port': '123.169.124.101:9999', 'user_pass': ''},
-    {'ip_port': '36.248.133.161:9999', 'user_pass': ''},
-    {'ip_port': '115.221.242.26:9999', 'user_pass': ''},
-    {'ip_port': '175.43.179.57:9999', 'user_pass': ''},
-    {'ip_port': '115.221.247.237:9999', 'user_pass': ''}
-]
+# PROXIES = [
+#     {'ip_port': '112.111.77.194:9999', 'user_pass': ''},
+#     {'ip_port': '175.42.123.114:9999', 'user_pass': ''},
+#     {'ip_port': '123.169.124.101:9999', 'user_pass': ''},
+#     {'ip_port': '36.248.133.161:9999', 'user_pass': ''},
+#     {'ip_port': '115.221.242.26:9999', 'user_pass': ''},
+#     {'ip_port': '175.43.179.57:9999', 'user_pass': ''},
+#     {'ip_port': '115.221.247.237:9999', 'user_pass': ''}
+# ]
 # #IP池设置
 # PROXIES=[{"ipaddr":"118.187.10.11:80"},
 #         {"ipaddr":"60.13.42.238:9999"},
@@ -152,6 +153,16 @@ PROXIES = [
 #         {"ipaddr": "121.232.148.131:9000"},
 #         {"ipaddr": "121.232.194.238:9000"},
 #         {"ipaddr":"116.209.53.196:9999"}]
+
+PROXIES=[
+    {"ipaddr":"182.101.207.11:8080"},
+    {"ipaddr":"114.230.120.42:9999"},
+    {"ipaddr":"121.231.216.23:8118"},
+    {"ipaddr":"49.75.59.242:3128"},
+    {"ipaddr":"114.233.131.216:9999"},
+    {"ipaddr":"183.157.172.77:8118"},
+    {"ipaddr":"122.237.83.112:9000"}
+]
 
 COOKIES_ENABLED=False
 

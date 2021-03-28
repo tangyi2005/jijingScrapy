@@ -124,9 +124,11 @@ class ProxyMiddleware(object):
     def process_request(self, request, spider):
         print("**********是否进入代理方法")
         proxy = random.choice(PROXIES)
-        print("当前使用的ip是："+proxy["ip_port"])
-        print("**************ProxyMiddleware no pass************" + proxy['ip_port'])
-        request.meta['proxy'] = "http://%s" % proxy['ip_port']
+        print("当前使用的ip是："+proxy["ipaddr"])
+        print("**************ProxyMiddleware no pass************" + proxy['ipaddr'])
+        # request.meta["proxy"] = "http://"+proxy['ipaddr']
+        request.meta["proxy"] = "http://113.194.134.98:9999"
+        print("****************request是什么数据"+request)
         # if proxy['user_pass'] is not None:
         #     request.meta['proxy'] = "http://%s" % proxy['ip_port']
         #     print("**********是否进入代理方法01"+proxy['user_pass'])
@@ -144,10 +146,13 @@ class WangyiproDownloaderMiddleware(object):
     def process_request(self, request, spider):
         print("*******这里是什么"+spider.name)
         if spider.name in ['cnblogs']:
+            print("*********进了这里")
             driver = utils.create_chrome_driver()
+            print("*********这里来了没有")
             driver.get(request.url)
             response = HtmlResponse(url=request.url)
             response.driver = driver
+            print("*********response是什么:")
             return response
         else:
             return None
